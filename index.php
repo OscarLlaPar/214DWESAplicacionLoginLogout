@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        ?>
-    </body>
-</html>
+<?php
+    require_once "conf/confAplicacion.php";
+    session_start();
+    if(isset($_REQUEST['login'])){
+        
+        $_SESSION['UsuarioLoginLogout']="a";
+        
+    }
+    if(isset($_REQUEST['logout'])){
+        session_destroy();
+        header("Location: index.php");
+        
+    }
+    (!isset($_SESSION['UsuarioLoginLogout']))?require_once 'controller/cLogin.php':require_once 'controller/cInicio.php';  
+?>
