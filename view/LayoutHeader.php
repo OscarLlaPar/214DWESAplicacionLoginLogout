@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <link href="../webroot/css/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
+        <header>
+            <h1>LoginLogout</h1>
+            <h2>Óscar Llamas Parra</h2>
+        </header>
     </body>
 </html>

@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>OLP-Login Logout - Inicio</title>
+        <link href="../webroot/css/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         Has iniciado sesión
