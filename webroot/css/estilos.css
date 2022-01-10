@@ -2,20 +2,45 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: black;
+    
     color: white;
 }
 body{
-    
+    background-color: black;
     font-family: Roboto, sans-serif;
     text-align: center;
-    
-    
+    display:flex;
+    flex-flow:column;
 }
 header{
     background-color:#0A001A;
+    width:100vw;
+    height: 10vh;
+    border-bottom:solid aqua 1px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 h2{
     font-size:18px;
     color:blue;
+}
+main{
+    display: flex;
+    justify-content: center;
+}
+input, label{
+    margin:5px;
+}
+.boton{
+    border:solid blueviolet 2px;
+    padding:5px;
+    background-color: grey;
+    color:white;
+}
+footer{
+    text-align: left;
+}
+.giturl{
+    height:10px;
 }

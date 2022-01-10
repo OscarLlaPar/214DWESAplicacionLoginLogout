@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link href="../webroot/css/estilos.css" rel="stylesheet" type="text/css"/>
+        <link href="webroot/css/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header>
