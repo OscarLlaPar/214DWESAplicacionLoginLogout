@@ -1,19 +1,21 @@
 <?php
+    /*
+        * Index de la aplicación
+        * @author Óscar Llamas Parra - oscar.llapar@educa.jcyl.es - https://github.com/OscarLlaPar
+        * @since 21/12/2021 
+        * @version 1.0 
+        * Última modificación: 11/01/2022
+    */
     require_once "conf/confAplicacion.php";
     session_start();
-    if(isset($_REQUEST['login'])){
-        
-        $_SESSION['UsuarioLoginLogout']="a";
-        
+    
+    
+    
+    if(!isset($_SESSION['pagina']) && !isset($_SESSION['usuario214DWESAplicacionLoginLogout'])){
+        $_SESSION['pagina'] = 'login';
     }
-    if(isset($_REQUEST['logout'])){
-        session_destroy();
-        header("Location: index.php");
-        
-    }
+
+    // Cargado de la página indicada.
+    require_once $aControladores[$_SESSION['pagina']]; 
     
-    require_once "view/LayoutHeader.php";
     
-    (!isset($_SESSION['UsuarioLoginLogout']))?require_once 'controller/cLogin.php':require_once 'controller/cInicio.php';  
-    
-    require_once "view/LayoutFooter.php";

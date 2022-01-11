@@ -32,6 +32,9 @@ main{
 input, label{
     margin:5px;
 }
+input{
+    background-color:black;
+}
 .boton{
     border:solid blueviolet 2px;
     padding:5px;
