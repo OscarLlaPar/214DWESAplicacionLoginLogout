@@ -18,7 +18,7 @@
                 $_SESSION['usuario214DWESAplicacionLoginLogout'] = $_REQUEST['usuario'];
                 $_SESSION['FechaHoraConexionAnterior'] = $oUsuarioValido->T01_FechaHoraUltimaConexion;
 
-                $_SESSION['pagina'] = $aControladores['inicio'];
+                $_SESSION['pagina'] = 'inicio';
                 header('Location: index.php');
                 exit;
             }
