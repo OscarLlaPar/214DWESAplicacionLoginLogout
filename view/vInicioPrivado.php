@@ -8,12 +8,12 @@
     <body>
         <main>
             <h2 class="titulo">Inicio</h2>
-            <p>¡Bienvenido <?php echo $sDescUsuario?>!</p>
-            <p>Te has conectado en total <?php echo $iNumConexiones?> veces</p>
+            <p>¡Bienvenido <?php echo $aVistaInicioPrivado['descUsuario']?>!</p>
+            <p>Te has conectado en total <?php echo $aVistaInicioPrivado['numConexiones']?> veces.</p>
             <?php
                 if(!is_null($_SESSION['FechaHoraConexionAnterior'])){
             ?>    
-            <p>Última conexión: <?php echo date('\E\l l d/m/Y \a \l\a\s H:i:s', $_SESSION['FechaHoraConexionAnterior']) ?></p>
+            <p>Última conexión: <?php echo date('\E\l d/m/Y \a \l\a\s H:i:s', $_SESSION['FechaHoraConexionAnterior']) ?></p>
             <?php
                 }
             ?>

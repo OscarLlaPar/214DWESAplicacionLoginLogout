@@ -1,7 +1,4 @@
 <?php
-    //Requerir las librerias
-    //Requerir el modelo
-    
     //Incluir librería de validación en la configuración de la aplicación
     require_once 'core/libreriaValidacion.php';
     
@@ -15,14 +12,17 @@
     // Configuración de la base de datos incluida
     require_once 'conf/confDB.php';
     
+    
     //Array de los ficheros de controladores
     $aControladores = [
         "login" => "controller/cLogin.php",
-        "inicio" => "controller/cInicio.php"
+        "inicioPrivado" => "controller/cInicioPrivado.php",
+        "WIP" => "controller/cWIP.php"
     ];
     
     //Array de los ficheros de vistas
     $aVistas = [
         "login" => "view/vLogin.php",
-        "inicio" => "view/vInicio.php"
+        "inicioPrivado" => "view/vInicioPrivado.php",
+        "WIP" => "view/vWIP.php"
     ];

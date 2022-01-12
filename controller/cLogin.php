@@ -7,6 +7,11 @@
         * Última modificación: 11/01/2022
     */
 
+    if(isset($_REQUEST['volver'])){
+        $vistaEnCurso= 'login';
+    }
+
+    
     
     if(isset($_REQUEST['login'])){    
         
@@ -18,7 +23,7 @@
                 $_SESSION['usuario214DWESAplicacionLoginLogout'] = $_REQUEST['usuario'];
                 $_SESSION['FechaHoraConexionAnterior'] = $oUsuarioValido->T01_FechaHoraUltimaConexion;
 
-                $_SESSION['pagina'] = 'inicio';
+                $_SESSION['pagina'] = 'inicioPrivado';
                 header('Location: index.php');
                 exit;
             }

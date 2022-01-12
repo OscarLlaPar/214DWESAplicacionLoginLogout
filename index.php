@@ -9,12 +9,14 @@
     require_once "conf/confAplicacion.php";
     session_start();
     
+    if(isset($_REQUEST['registro'])){
+        
+        $_SESSION['pagina'] = 'WIP';
+    }
     
-    
-    if(!isset($_SESSION['pagina']) && !isset($_SESSION['usuario214DWESAplicacionLoginLogout'])){
+    if(!isset($_SESSION['pagina'])){
         $_SESSION['pagina'] = 'login';
     }
-
     // Cargado de la página indicada.
     require_once $aControladores[$_SESSION['pagina']]; 
     

@@ -20,6 +20,7 @@
                     </tr>
                 </table>
                 <button type="submit" name="login" class="boton">Iniciar sesion</button>
+                <button type="submit" name="registro" class="boton">Registrarse</button>
             </form>
         </main>
     </body>

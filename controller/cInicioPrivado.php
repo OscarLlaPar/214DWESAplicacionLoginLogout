@@ -6,7 +6,7 @@
         * @version 1.0 
         * Última modificación: 11/01/2022
     */
-    $vistaEnCurso = $aVistas['inicio'];
+    $vistaEnCurso = $aVistas['inicioPrivado'];
     
     if(isset($_REQUEST['logout'])){
         session_unset();
@@ -22,9 +22,11 @@
         WHERE T01_CodUsuario='{$_SESSION['usuario214DWESAplicacionLoginLogout']}';
     QUERY;
     $oResultado = DBPDO::ejecutarConsulta($sSelect)->fetchObject();
-
-    $sDescUsuario = $oResultado->T01_DescUsuario;
-    $iNumConexiones = $oResultado->T01_NumConexiones; 
+    $aVistaInicioPrivado=[
+        'descUsuario' => $oResultado->T01_DescUsuario,
+        'numConexiones' => $oResultado->T01_NumConexiones
+    ];
+    
 
     require_once "view/LayoutHeader.php";
     require_once $vistaEnCurso;
