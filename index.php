@@ -10,14 +10,14 @@
     session_start();
     
     if(isset($_REQUEST['registro'])){
-        
-        $_SESSION['pagina'] = 'WIP';
+        $_SESSION['paginaAnterior'] = 'login';
+        $_SESSION['paginaEnCurso'] = 'WIP';
     }
     
-    if(!isset($_SESSION['pagina'])){
-        $_SESSION['pagina'] = 'login';
+    if(!isset($_SESSION['paginaEnCurso'])){
+        $_SESSION['paginaEnCurso'] = 'login';
     }
     // Cargado de la página indicada.
-    require_once $aControladores[$_SESSION['pagina']]; 
+    require_once $aControladores[$_SESSION['paginaEnCurso']]; 
     
     

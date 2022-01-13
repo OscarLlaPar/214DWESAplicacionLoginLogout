@@ -8,6 +8,7 @@
     require_once 'model/UsuarioPDO.php';
     require_once 'model/DB.php';
     require_once 'model/DBPDO.php';
+    require_once 'model/AppError.php';
     
     // Configuración de la base de datos incluida
     require_once 'conf/confDB.php';
@@ -17,12 +18,14 @@
     $aControladores = [
         "login" => "controller/cLogin.php",
         "inicioPrivado" => "controller/cInicioPrivado.php",
-        "WIP" => "controller/cWIP.php"
+        "WIP" => "controller/cWIP.php",
+        "error" => "controller/cError.php"
     ];
     
     //Array de los ficheros de vistas
     $aVistas = [
         "login" => "view/vLogin.php",
         "inicioPrivado" => "view/vInicioPrivado.php",
-        "WIP" => "view/vWIP.php"
+        "WIP" => "view/vWIP.php",
+        "error" => "view/vError.php"
     ];

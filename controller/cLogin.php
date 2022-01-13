@@ -7,12 +7,6 @@
         * Última modificación: 11/01/2022
     */
 
-    if(isset($_REQUEST['volver'])){
-        $vistaEnCurso= 'login';
-    }
-
-    
-    
     if(isset($_REQUEST['login'])){    
         
         if (validacionFormularios::comprobarAlfaNumerico($_REQUEST['usuario'], 8, 4, 1) == null
@@ -20,10 +14,10 @@
             
             $oUsuarioValido = UsuarioPDO::validarUsuario($_REQUEST['usuario'], $_REQUEST['password']);
             if($oUsuarioValido){
-                $_SESSION['usuario214DWESAplicacionLoginLogout'] = $_REQUEST['usuario'];
+                $_SESSION['usuario214DWESAplicacionLoginLogout'] = $oUsuarioValido;
                 $_SESSION['FechaHoraConexionAnterior'] = $oUsuarioValido->T01_FechaHoraUltimaConexion;
-
-                $_SESSION['pagina'] = 'inicioPrivado';
+                $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+                $_SESSION['paginaEnCurso'] = 'inicioPrivado';
                 header('Location: index.php');
                 exit;
             }

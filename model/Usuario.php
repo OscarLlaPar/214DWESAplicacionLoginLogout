@@ -14,6 +14,7 @@
         private $fechaHoraUltimaConexion;
         private $fechaHoraUltimaConexionAnterior;
         private $perfil;
+        private $imagenUsuario;
 
         function __construct($codUsuario, $password, $descUsuario, $numAccesos, $fechaHoraUltimaConexion, $fechaHoraUltimaConexionAnterior, $perfil) {
             $this->codUsuario = $codUsuario;
@@ -24,5 +25,71 @@
             $this->fechaHoraUltimaConexionAnterior = $fechaHoraUltimaConexionAnterior;
             $this->perfil = $perfil;
         }
+        
+        function getCodUsuario() {
+            return $this->codUsuario;
+        }
 
+        function getPassword() {
+            return $this->password;
+        }
+
+        function getDescUsuario() {
+            return $this->descUsuario;
+        }
+
+        function getNumAccesos() {
+            return $this->numAccesos;
+        }
+
+        function getFechaHoraUltimaConexion() {
+            return $this->fechaHoraUltimaConexion;
+        }
+
+        function getFechaHoraUltimaConexionAnterior() {
+            return $this->fechaHoraUltimaConexionAnterior;
+        }
+
+        function getPerfil() {
+            return $this->perfil;
+        }
+
+        function getImagenUsuario() {
+            return $this->imagenUsuario;
+        }
+
+        function setCodUsuario($codUsuario): void {
+            $this->codUsuario = $codUsuario;
+        }
+
+        function setPassword($password): void {
+            $this->password = $password;
+        }
+
+        function setDescUsuario($descUsuario): void {
+            $this->descUsuario = $descUsuario;
+        }
+
+        function setNumAccesos($numAccesos): void {
+            $this->numAccesos = $numAccesos;
+        }
+
+        function setFechaHoraUltimaConexion($fechaHoraUltimaConexion): void {
+            $this->fechaHoraUltimaConexion = $fechaHoraUltimaConexion;
+        }
+
+        function setFechaHoraUltimaConexionAnterior($fechaHoraUltimaConexionAnterior): void {
+            $this->fechaHoraUltimaConexionAnterior = $fechaHoraUltimaConexionAnterior;
+        }
+
+        function setPerfil($perfil): void {
+            $this->perfil = $perfil;
+        }
+
+        function setImagenUsuario($imagenUsuario): void {
+            $this->imagenUsuario = $imagenUsuario;
+        }
+
+
+        
     }

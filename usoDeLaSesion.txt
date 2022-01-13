@@ -1,4 +1,6 @@
 -AL EFECTUAR EL LOGIN
     · $_SESSION['usuario214DWESAplicacionLoginLogout']: Almacena el nombre de usuario
-    · $_SESSION['FechaHoraConexionAnterior']: Guarda la fecha y hora de la conexión anterior
-    · $_SESSION['pagina']: Guarda la página que se ha de cargar
+    · $_SESSION['paginaEnCurso']: Guarda el nombre (índice de array) de la página que se ha de cargar
+    · $_SESSION['paginaAnterior']: Guarda el nombre de la página anterior en la que ha estado el usuario
+-AL HACER LOGOUT
+    · Se destruye la sesión

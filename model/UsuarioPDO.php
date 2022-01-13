@@ -23,16 +23,16 @@
              * introducida sea correcta.
              */
             $sSelect = <<<QUERY
-                SELECT T01_FechaHoraUltimaConexion FROM T01_Usuario
+                SELECT * FROM T01_Usuario
                 WHERE T01_CodUsuario='{$codigoUsuario}' AND
                 T01_Password=SHA2("{$codigoUsuario}{$password}", 256);
             QUERY;
 
             $oResultado = DBPDO::ejecutarConsulta($sSelect);
-            $oUsuario = $oResultado->fetchObject();
-            /*
-             * Si existe el objeto, registra la última conexión y lo devuelve.
-             */
+            $oDatos = $oResultado->fetchObject();
+            
+            $oUsuario = new Usuario($oDatos->T01_CodUsuario, $oDatos->T01_Password, $oDatos->T01_DescUsuario, $oDatos->T01_NumConexiones, time(), $oDatos->T01_FechaHoraUltimaConexion, $oDatos->T01_Perfil);
+            
             if($oUsuario){
                 self::registrarUltimaConexion($codigoUsuario);
                 return $oUsuario;

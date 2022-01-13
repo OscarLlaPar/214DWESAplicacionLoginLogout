@@ -11,13 +11,15 @@
             <p>¡Bienvenido <?php echo $aVistaInicioPrivado['descUsuario']?>!</p>
             <p>Te has conectado en total <?php echo $aVistaInicioPrivado['numConexiones']?> veces.</p>
             <?php
-                if(!is_null($_SESSION['FechaHoraConexionAnterior'])){
+                if(!empty($aVistaInicioPrivado['fechaHoraUltimaConexion'])) {
             ?>    
-            <p>Última conexión: <?php echo date('\E\l d/m/Y \a \l\a\s H:i:s', $_SESSION['FechaHoraConexionAnterior']) ?></p>
+            <p>Última conexión: <?php echo date("\E\l d/m/Y \a \l\a\s H:i:s",$aVistaInicioPrivado['fechaHoraUltimaConexion']) ?></p>
             <?php
                 }
             ?>
             <form action="index.php" method="post">
+                <button type="submit" name="detalle" class="boton">Detalle</button>
+                <button type="submit" name="mtoDepartamentos" class="boton">MtoDepartamentos</button>
                 <button type="submit" name="logout" class="boton">Cerrar sesion</button>
             </form>
         </main>
