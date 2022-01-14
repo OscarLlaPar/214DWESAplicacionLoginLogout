@@ -8,7 +8,24 @@
     <body>
         <main>
             <h1>Se ha producido un error</h1>
-            <button type="submit" name="volver" class="boton">Volver</button>
+            <table class="error">
+                <thead>
+                    <tr>
+                        <th colspan="2">Detalles del error</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <th>Mensaje</th>
+                    <td><?php echo $aError['mensaje'] ?></td>
+                </tr>
+                <tr>
+                    <th>Código</th>
+                    <td><?php echo $aError['codigo'] ?></td>
+                </tr>
+            </table>
+            <form action="index.php">    
+                <button type="submit" name="volver" class="boton">Volver</button>
+            </form>
         </main>
     </body>
 </html>

@@ -59,6 +59,14 @@ input{
     font-size:80px;
     font-weight:bold;
 }
+.error, .error td, .error th{
+    border:solid white 1px;
+    border-collapse: collapse;
+    padding: 10px;
+}
+.error th{
+    background-color: #8E0029;
+}
 footer{
     text-align: left;
     border-top: solid white 1px;
