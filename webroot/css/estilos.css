@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+    color: white;
+}
+body{
+    background-color: black;
+    font-family: Roboto, sans-serif;
+    text-align: center;
+    display:flex;
+    flex-flow:column;
+    height: 100vh;
+}
+header{
+    background-color:#0A001A;
+    width:100vw;
+    height: 10vh;
+    border-bottom:solid #2F95FA 1px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    flex-flow: column;
+    gap: 20px;
+}
+h2{
+    font-size:18px;
+    color:#2F95FA;
+}
+form, form table{
+    height:15vh;
+}
+input, label{
+    margin:5px;
+}
+input{
+    background-color:black;
+}
+.boton{
+    border:solid blueviolet 2px;
+    padding:5px;
+    background-color: grey;
+    color:white;
+    margin:5px;                                                                                                  
+}
+.boton:hover{
+    cursor: pointer;
+}
+.wip{
+    font-size:80px;
+    font-weight:bold;
+}
+.error, .error td, .error th{
+    border:solid white 1px;
+    border-collapse: collapse;
+    padding: 10px;
+}
+.error th{
+    background-color: #8E0029;
+}
+footer{
+    text-align: left;
+    border-top: solid white 1px;
+    font-family: serif;
+    font-size: 14px;
+    height: 10vh;
+    padding-left:20px;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    gap:5px;
+}
+.giturl{
+    height:10px;
+}
