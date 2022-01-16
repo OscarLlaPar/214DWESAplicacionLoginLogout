@@ -31,11 +31,8 @@
             $oResultado = DBPDO::ejecutarConsulta($sSelect);
             $oDatos = $oResultado->fetchObject();
             
-            $oUsuario = new Usuario($oDatos->T01_CodUsuario, $oDatos->T01_Password, $oDatos->T01_DescUsuario, $oDatos->T01_NumConexiones, time(), $oDatos->T01_FechaHoraUltimaConexion, $oDatos->T01_Perfil);
-            
-            if($oUsuario){
-                self::registrarUltimaConexion($codigoUsuario);
-                return $oUsuario;
+            if($oDatos){
+                return new Usuario($oDatos->T01_CodUsuario, $oDatos->T01_Password, $oDatos->T01_DescUsuario, $oDatos->T01_NumConexiones, time(), $oDatos->T01_FechaHoraUltimaConexion, $oDatos->T01_Perfil);
             }
             /*
              * Si no existe, devuelve false.
@@ -86,12 +83,17 @@
          * @param String $codigoUsuario Código del usuario al que registrar una nueva conexión.
          * @return PDOStatement Resultado del update.
          */
-        public static function registrarUltimaConexion($codigoUsuario){
+        public static function registrarUltimaConexion($oUsuario){
+            $iFechaActual = time();
             $sUpdate = <<<QUERY
                 UPDATE T01_Usuario SET T01_NumConexiones=T01_NumConexiones+1,
-                T01_FechaHoraUltimaConexion = unix_timestamp()
-                WHERE T01_CodUsuario='{$codigoUsuario}';
+                T01_FechaHoraUltimaConexion = {$iFechaActual}
+                WHERE T01_CodUsuario='{$oUsuario->getCodUsuario()}';
             QUERY;
+
+            $oUsuario->setFechaHoraUltimaConexionAnterior($oUsuario->getFechaHoraUltimaConexion);
+            $oUsuario->setFechaHoraUltimaConexion = $iFechaActual;
+            $oUsuario->setNumAccesos($oUsuario->getNumAccesos()+1);
 
             return DBPDO::ejecutarConsulta($sUpdate);
         }

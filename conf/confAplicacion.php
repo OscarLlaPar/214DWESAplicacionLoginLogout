@@ -18,6 +18,7 @@
     $aControladores = [
         "login" => "controller/cLogin.php",
         "inicioPrivado" => "controller/cInicioPrivado.php",
+        "inicioPublico" => "controller/cInicioPublico.php",
         "WIP" => "controller/cWIP.php",
         "error" => "controller/cError.php"
     ];
@@ -26,6 +27,7 @@
     $aVistas = [
         "login" => "view/vLogin.php",
         "inicioPrivado" => "view/vInicioPrivado.php",
+        "inicioPublico" => "view/vInicioPublico.php",
         "WIP" => "view/vWIP.php",
         "error" => "view/vError.php"
     ];
