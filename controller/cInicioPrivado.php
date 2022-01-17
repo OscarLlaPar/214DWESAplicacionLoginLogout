@@ -10,7 +10,7 @@
     
     if(isset($_REQUEST['detalle'])){
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-        $_SESSION['paginaEnCurso'] = 'WIP';
+        $_SESSION['paginaEnCurso'] = 'detalle';
         header('Location: index.php');
         exit;
     }

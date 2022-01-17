@@ -19,6 +19,8 @@
         "login" => "controller/cLogin.php",
         "inicioPrivado" => "controller/cInicioPrivado.php",
         "inicioPublico" => "controller/cInicioPublico.php",
+        "registro" => "controller/cRegistro.php",
+        "detalle" => "controller/cDetalle.php",
         "WIP" => "controller/cWIP.php",
         "error" => "controller/cError.php"
     ];
@@ -28,6 +30,8 @@
         "login" => "view/vLogin.php",
         "inicioPrivado" => "view/vInicioPrivado.php",
         "inicioPublico" => "view/vInicioPublico.php",
+        "registro" => "view/vRegistro.php",
+        "detalle" => "view/vDetalle.php",
         "WIP" => "view/vWIP.php",
         "error" => "view/vError.php"
     ];

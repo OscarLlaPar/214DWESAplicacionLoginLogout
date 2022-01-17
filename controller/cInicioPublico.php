@@ -9,7 +9,7 @@
     $_SESSION['paginaAnterior'] = 'inicioPublico';
 
     if(isset($_REQUEST['registro'])){
-        $_SESSION['paginaEnCurso'] = 'WIP';
+        $_SESSION['paginaEnCurso'] = 'registro';
         header('Location: index.php');
         exit;
     }

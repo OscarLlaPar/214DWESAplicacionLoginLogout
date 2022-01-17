@@ -32,7 +32,7 @@
             $oDatos = $oResultado->fetchObject();
             
             if($oDatos){
-                return new Usuario($oDatos->T01_CodUsuario, $oDatos->T01_Password, $oDatos->T01_DescUsuario, $oDatos->T01_NumConexiones, time(), $oDatos->T01_FechaHoraUltimaConexion, $oDatos->T01_Perfil);
+                return new Usuario($oDatos->T01_CodUsuario, $oDatos->T01_Password, $oDatos->T01_DescUsuario, $oDatos->T01_NumConexiones, $oDatos->T01_FechaHoraUltimaConexion, null, $oDatos->T01_Perfil);
             }
             /*
              * Si no existe, devuelve false.
@@ -91,8 +91,8 @@
                 WHERE T01_CodUsuario='{$oUsuario->getCodUsuario()}';
             QUERY;
 
-            $oUsuario->setFechaHoraUltimaConexionAnterior($oUsuario->getFechaHoraUltimaConexion);
-            $oUsuario->setFechaHoraUltimaConexion = $iFechaActual;
+            $oUsuario->setFechaHoraUltimaConexionAnterior($oUsuario->getFechaHoraUltimaConexion());
+            $oUsuario->setFechaHoraUltimaConexion($iFechaActual);
             $oUsuario->setNumAccesos($oUsuario->getNumAccesos()+1);
 
             return DBPDO::ejecutarConsulta($sUpdate);

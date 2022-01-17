@@ -16,7 +16,7 @@
     
     if(isset($_REQUEST['registro'])){
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso']; 
-        $_SESSION['paginaEnCurso'] = 'WIP';
+        $_SESSION['paginaEnCurso'] = 'registro';
         header('Location: index.php');
         exit;
     }
@@ -50,9 +50,10 @@
             $aRespuestas['usuario'] = $_REQUEST['usuario'];
             $aRespuestas['password'] = $_REQUEST['password'];
         
-            $oUsuarioValido=UsuarioPDO::registrarUltimaConexion($oUsuarioValido);
-            $_SESSION['usuario214DWESAplicacionLoginLogout'] = $oUsuarioValido;
-            $_SESSION['paginaEnCurso'] = 'inicioPrivado';
+            if(UsuarioPDO::registrarUltimaConexion($oUsuarioValido)){
+                $_SESSION['usuario214DWESAplicacionLoginLogout'] = $oUsuarioValido;
+                $_SESSION['paginaEnCurso'] = 'inicioPrivado';
+            }
             header('Location: index.php');
             exit;
     }
