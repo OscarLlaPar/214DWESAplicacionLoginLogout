@@ -6,13 +6,13 @@
         <link href="webroot/css/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <main>
+        <article class="detalle">
             <form action="index.php">
                 <button type="submit" name="volver" class="boton">Volver</button>
             </form>
             <div>
-                
+                <?php phpinfo(); ?>
             </div>
-        </main>
+        </article>
     </body>
 </html>

@@ -69,6 +69,7 @@ input{
 }
 footer{
     text-align: left;
+    background-color:#0A001A;
     border-top: solid white 1px;
     font-family: serif;
     font-size: 14px;
@@ -79,7 +80,27 @@ footer{
     align-items: flex-start;
     justify-content: space-evenly;
     gap:5px;
+    position:sticky;
+    bottom:0;
 }
 .giturl{
     height:10px;
+}
+.detalle, .detalle div, .detalle table{
+    height:auto;
+    color:black;
+}
+.e{
+    coloer:black;
+}
+#zPHP { background-color: darkGray; }
+
+#presentation{
+    width:500px;
+    height: 140px;
+    text-align: center;
+    color: lightGray;
+    margin: auto;
+    margin-top: -20px;
+    padding-top: 40px;
 }
