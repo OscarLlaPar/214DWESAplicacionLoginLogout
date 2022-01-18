@@ -20,6 +20,7 @@
             <form action="index.php" method="post">
                 <button type="submit" name="detalle" class="boton">Detalle</button>
                 <button type="submit" name="mtoDepartamentos" class="boton">MtoDepartamentos</button>
+                <button type="submit" name="editarPerfil" class="boton">Editar perfil</button>
                 <button type="submit" name="logout" class="boton">Cerrar sesion</button>
             </form>
         </main>

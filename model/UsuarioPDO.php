@@ -41,7 +41,39 @@
                 return false;
             }
         }
+        
+        /**
+         * Búsqueda de un usuario que tenga el código pasado por parámetro
+         * 
+         * @param String $codigoUsuario Código del usuario que se quiere buscar.
+         * @return Object|boolean Devuelve un objeto Usuario si el usuario existe, 
+         * y false en caso contrario.
+         */
+        public static function buscarUsuarioPorCod($codigoUsuario) {
+            /*
+             * Query de selección del usuario según su código y contraseña, de modo
+             * que valida tanto la existencia del usuario como que la contraseña
+             * introducida sea correcta.
+             */
+            $sSelect = <<<QUERY
+                SELECT * FROM T01_Usuario
+                WHERE T01_CodUsuario='{$codigoUsuario}';
+            QUERY;
 
+            $oResultado = DBPDO::ejecutarConsulta($sSelect);
+            $oDatos = $oResultado->fetchObject();
+            
+            if($oDatos){
+                return new Usuario($oDatos->T01_CodUsuario, $oDatos->T01_Password, $oDatos->T01_DescUsuario, $oDatos->T01_NumConexiones, $oDatos->T01_FechaHoraUltimaConexion, null, $oDatos->T01_Perfil);
+            }
+            /*
+             * Si no existe, devuelve false.
+             */
+            else{
+                return false;
+            }
+        }
+        
         /**
          * Inserción, registro de un usuario en la base de datos.
          * 
@@ -64,18 +96,78 @@
         }
 
         /**
-         * 
+         * Modificación de usuario.
+        * 
+        * Modifica la descripción e imagen del usuario indicado en la base de datos
+        * y el propio objeto usuario.
+        * 
+        * @param Usuario $usuario Usuario a modificar.
+        * @param String $descUsuario Nueva descripción que dar al usuario.
+        * @param String $imagenUsuario Nueva imagen del usuario.
+        * @return Usuario|false Devuelve el objeto usuario modificado si todo es correcto,
+        * o false en caso contrario.
          */
-        public static function modificarUsuario(){
+        public static function modificarUsuario($usuario, $descUsuario, $imagenUsuario = ''){
+            $sUpdate = <<<QUERY
+                UPDATE T01_Usuario SET T01_DescUsuario = "{$descUsuario}",
+                T01_ImagenUsuario = '{$imagenUsuario}'
+                WHERE T01_CodUsuario = "{$usuario->getCodUsuario()}";
+            QUERY;
 
+            $usuario->setDescUsuario($descUsuario);
+            $usuario->setImagenUsuario($imagenUsuario);
+
+            if(DBPDO::ejecutarConsulta($sUpdate)){
+                return $usuario;
+            }
+            else{
+                return false;
+            }
         }
-
+        
         /**
-         * 
-         */
-        public static function borrarUsuario(){
+        * Cambio de contraseña.
+        * 
+        * Modifica la contraseña del usuario indicado en la base de datos y en el
+        * objeto antes de devolverlo.
+        * 
+        * @param Usuario $usuario Usuario a modificar.
+        * @param String $password Nueva contraseña del usuario.
+        * @return Usuario|false Devuelve el objeto usuario modificado si todo es correcto,
+        * o false en caso contrario.
+        */
+       public static function cambiarPassword($usuario, $password){
+           $sUpdate = <<<QUERY
+               UPDATE T01_Usuario SET T01_Password = SHA2("{$usuario->getCodUsuario()}{$password}", 256)
+               WHERE T01_CodUsuario = "{$usuario->getCodUsuario()}";
+           QUERY;
 
-        }
+           $usuario->setPassword($descUsuario);
+
+           if(DBPDO::ejecutarConsulta($sUpdate)){
+               return $usuario;
+           }
+           else{
+               return false;
+           }
+       }
+        
+        /**
+        * Eliminación de usuario.
+        * 
+        * Elimina el usuario dado de la base de datos.
+        * 
+        * @param Usuario $usuario Usuario a ser eliminado.
+        * @return PDOStatement Resultado del delete.
+        */
+        public static function borrarUsuario($oUsuario){
+           $sDelete = <<<QUERY
+               DELETE FROM T01_Usuario
+               WHERE T01_CodUsuario='{$oUsuario->getCodUsuario()}';
+           QUERY;
+
+           return DBPDO::ejecutarConsulta($sDelete);
+       }
 
         /**
          * Dado un código de usuario, modifica la fecha-hora de última conexión, añade 

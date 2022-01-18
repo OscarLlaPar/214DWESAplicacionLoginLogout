@@ -21,6 +21,9 @@
         "inicioPublico" => "controller/cInicioPublico.php",
         "registro" => "controller/cRegistro.php",
         "detalle" => "controller/cDetalle.php",
+        "miCuenta" => "controller/cMiCuenta.php",
+        "borrarCuenta" => "controller/cBorrarCuenta.php",
+        "cambiarPassword" => "controller/cCambiarPassword.php",
         "WIP" => "controller/cWIP.php",
         "error" => "controller/cError.php"
     ];
@@ -32,6 +35,9 @@
         "inicioPublico" => "view/vInicioPublico.php",
         "registro" => "view/vRegistro.php",
         "detalle" => "view/vDetalle.php",
+        "miCuenta" => "view/vMiCuenta.php",
+        "borrarCuenta" => "view/vBorrarCuenta.php",
+        "cambiarPassword" => "view/vCambiarPassword.php",
         "WIP" => "view/vWIP.php",
         "error" => "view/vError.php"
     ];

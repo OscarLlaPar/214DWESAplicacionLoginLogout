@@ -22,6 +22,13 @@
         exit;
     }
     
+    if(isset($_REQUEST['editarPerfil'])){
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'miCuenta';
+        header('Location: index.php');
+        exit;
+    }
+    
     if(isset($_REQUEST['logout'])){
         session_unset();
         session_destroy();
