@@ -37,7 +37,7 @@
     
     $bEntradaOK = true;
     
-    $_SESSION['usuario214DWESAplicacionLoginLogout']= UsuarioPDO::buscarUsuarioPorCod($_SESSION['usuario214DWESAplicacionLoginLogout']->getCodUsuario());
+    //$_SESSION['usuario214DWESAplicacionLoginLogout']= UsuarioPDO::buscarUsuarioPorCod($_SESSION['usuario214DWESAplicacionLoginLogout']->getCodUsuario());
     
     $aUsuario=[
         'nombre' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getCodUsuario(),
@@ -45,17 +45,15 @@
         'fechaHoraUltimaConexion' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getFechaHoraUltimaConexion(),
         'numConexiones' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getNumAccesos(),
         'perfil' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getPerfil(),
-        'pasword' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getPassword()
- 
+        'password' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getPassword()
     ];
     
     if(isset($_REQUEST['aceptar'])){
-        $aErrores['descripcion']= validacionFormularios::comprobarAlfaNumerico($_REQUEST['descripcion']);
+        $aErrores['descripcion']= validacionFormularios::comprobarAlfaNumerico($_REQUEST['descripcion'], 255, 3, 1);
         
         if($aErrores['descripcion']!=null){
-            //limpieza del campo para cuando vuelva a aparecer el formulario
-            $_REQUEST[key($error)]=$_SESSION['usuario214DWESAplicacionLoginLogout']->getDescUsuario();
-            $entradaOK=false;
+            $_REQUEST['descripcion']=$_SESSION['usuario214DWESAplicacionLoginLogout']->getDescUsuario();
+            $bEntradaOK=false;
         }
         
     }
@@ -65,10 +63,8 @@
     if($bEntradaOK){
         $aRespuestas['descripcion'] = $_REQUEST['descripcion'];
         
-        $_SESSION['usuario214DWESAplicacionLoginLogout']= UsuarioPDO::modificarUsuario($_SESSION['usuario214DWESAplicacionLoginLogout']->getCodUsuario(),$aRespuestas['descripcion']);
+        $_SESSION['usuario214DWESAplicacionLoginLogout']= UsuarioPDO::modificarUsuario($_SESSION['usuario214DWESAplicacionLoginLogout'],$aRespuestas['descripcion']);
         
-        
-        $_SESSION['usuario214DWESAplicacionLoginLogout'] = $oUsuarioValido;
         $_SESSION['paginaEnCurso'] = 'inicioPrivado';
         
         header('Location: index.php');

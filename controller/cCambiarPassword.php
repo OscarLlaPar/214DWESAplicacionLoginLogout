@@ -13,10 +13,48 @@
         exit;
     }
     
+    $aErrores = [
+        'password' => '',
+        'nuevaPassword' => '',
+        'confirmarPassword' => ''
+    ];
+
+    $aRespuestas = [
+        'nuevaPassword' => ''
+    ];
     
+    $bEntradaOK = true;
     
     if(isset($_REQUEST['aceptar'])){
+        $oUsuarioValido = UsuarioPDO::validarUsuario($_SESSION['usuario214DWESAplicacionLoginLogout']->getCodUsuario(), $_REQUEST['password']);
+            
+        if(!$oUsuarioValido){
+            $bEntradaOK = false;
+        }
         
+        $aErrores['nuevaPassword']= validacionFormularios::validarPassword($_REQUEST['nuevaPassword'], 16, 2, 1, 1);
+        
+        if($aErrores['nuevaPassword']!=null){
+            $_REQUEST['nuevaPassword']="";
+            $bEntradaOK=false;
+        }
+        
+        if($_REQUEST['confirmarPassword']!=$_REQUEST['nuevaPassword']){
+            $aErrores['confirmarPassword']="Las contraseñas no coinciden";
+            $bEntradaOK=false;
+        }
+    }
+    else{
+        $bEntradaOK = false;
+    }
+    if($bEntradaOK){
+        $aRespuestas['nuevaPassword'] = $_REQUEST['nuevaPassword'];
+        
+        $_SESSION['usuario214DWESAplicacionLoginLogout']= UsuarioPDO::cambiarPassword($_SESSION['usuario214DWESAplicacionLoginLogout'], $aRespuestas['nuevaPassword']);
+        
+        $_SESSION['paginaEnCurso'] = 'miCuenta';
+        header('Location: index.php');
+        exit;
     }
     
     $paginaEnCurso = 'cambiarPassword';

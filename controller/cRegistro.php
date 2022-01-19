@@ -31,21 +31,21 @@
     $bEntradaOK = true;
     
     if(isset($_REQUEST['registro'])){
-        $aErrores['usuario']= validacionFormularios::comprobarAlfaNumerico($_REQUEST['usuario']);
+        $aErrores['usuario']= validacionFormularios::comprobarAlfaNumerico($_REQUEST['usuario'], 8, 4, 1);
         if (is_null($aErrores['usuario']) && UsuarioPDO::validarCodNoExiste($codigoUsuario)){
             $aErrores['usuario']="Ya existe un usuario con ese nombre";
         }
-        $aErrores['descripcion']= validacionFormularios::comprobarAlfaNumerico($_REQUEST['descripcion']);
+        $aErrores['descripcion']= validacionFormularios::comprobarAlfaNumerico($_REQUEST['descripcion'], 255, 3, 1);
         $aErrores['password']= validacionFormularios::validarPassword($_REQUEST['password'], 16, 2, 1, 1);
         if($_REQUEST['confirmarPassword']!=$_REQUEST['password']){
             $aErrores['confirmarPassword']="Las contraseñas no coinciden";
         }
-        foreach($aErrores as $error){
+        foreach($aErrores as $clave => $error){
             //condición de que hay un error
             if(($error)!=null){
                 //limpieza del campo para cuando vuelva a aparecer el formulario
-                $_REQUEST[key($error)]="";
-                $entradaOK=false;
+                $_REQUEST[$clave]="";
+                $bEntradaOK=false;
             }
         }
     }

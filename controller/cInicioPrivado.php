@@ -6,7 +6,7 @@
         * @version 1.0 
         * Última modificación: 11/01/2022
     */
-    $vistaEnCurso = $aVistas['inicioPrivado'];
+    
     
     if(isset($_REQUEST['detalle'])){
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
@@ -46,6 +46,7 @@
         'fechaHoraUltimaConexion' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getFechaHoraUltimaConexionAnterior()
     ];
     
+    $vistaEnCurso = $aVistas['inicioPrivado'];
     require_once "view/LayoutHeader.php";
     require_once $vistaEnCurso;
     require_once "view/LayoutFooter.php";

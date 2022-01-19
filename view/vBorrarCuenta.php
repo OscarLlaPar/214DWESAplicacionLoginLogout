@@ -12,27 +12,27 @@
                 <table>
                     <tr>
                         <td><label for="usuario">Nombre de usuario: </label></td>
-                        <td><input id="usuario" type="text" name="usuario" readonly value="<?php $aUsuario['nombre'] ?>"></td>
+                        <td><input id="usuario" type="text" name="usuario" readonly value="<?php echo $aUsuario['nombre'] ?>"></td>
                     </tr>
                     <tr>
                         <td><label for="descripcion">Descripción de usuario: </label></td>
-                        <td><input id="descripcion" type="text" name="descripcion" readonly value="<?php $aUsuario['descripcion'] ?>"></td>
+                        <td><input id="descripcion" type="text" name="descripcion" readonly value="<?php echo $aUsuario['descripcion'] ?>"></td>
                     </tr>
                     <tr>
                         <td><label for="fechaHoraUltimaConexion">Descripción de usuario: </label></td>
-                        <td><input id="fechaHoraUltimaConexion" type="text" name="fechaHoraUltimaConexion" readonly value="<?php $aUsuario['fechaHoraUltimaConexion']?>"></td>
+                        <td><input id="fechaHoraUltimaConexion" type="text" name="fechaHoraUltimaConexion" readonly value="<?php echo $aUsuario['fechaHoraUltimaConexion']?>"></td>
                     </tr>
                     <tr>
                         <td><label for="numConexiones">Descripción de usuario: </label></td>
-                        <td><input id="numConexiones" type="text" name="numConexiones" readonly value="<?php $aUsuario['numConexiones']?>"></td>
+                        <td><input id="numConexiones" type="text" name="numConexiones" readonly value="<?php echo $aUsuario['numConexiones']?>"></td>
                     </tr>
                     <tr>
                         <td><label for="perfil">Descripción de usuario: </label></td>
-                        <td><input id="perfil" type="text" name="perfil" readonly value="<?php $aUsuario['perfil']?>"></td>
+                        <td><input id="perfil" type="text" name="perfil" readonly value="<?php echo $aUsuario['perfil']?>"></td>
                     </tr>
                     <tr>
                         <td><label for="password">Contraseña: </label></td>
-                        <td><input id="password" type="password" name="password" readonly value="<?php $aUsuario['password']?>"></td>
+                        <td><input id="password" type="password" name="password" readonly value="<?php echo $aUsuario['password']?>"></td>
                     </tr>
                 </table>
                 <p>¿Estás seguro?</p>

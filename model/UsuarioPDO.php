@@ -108,14 +108,16 @@
         * o false en caso contrario.
          */
         public static function modificarUsuario($usuario, $descUsuario, $imagenUsuario = ''){
+            $usuario->setDescUsuario($descUsuario);
+            $usuario->setImagenUsuario($imagenUsuario);
+            
             $sUpdate = <<<QUERY
-                UPDATE T01_Usuario SET T01_DescUsuario = "{$descUsuario}",
-                T01_ImagenUsuario = '{$imagenUsuario}'
+                UPDATE T01_Usuario SET T01_DescUsuario = "{$usuario->getDescUsuario()}",
+                T01_ImagenUsuario = '{$usuario->getImagenUsuario()}'
                 WHERE T01_CodUsuario = "{$usuario->getCodUsuario()}";
             QUERY;
 
-            $usuario->setDescUsuario($descUsuario);
-            $usuario->setImagenUsuario($imagenUsuario);
+            
 
             if(DBPDO::ejecutarConsulta($sUpdate)){
                 return $usuario;
@@ -177,16 +179,17 @@
          */
         public static function registrarUltimaConexion($oUsuario){
             $iFechaActual = time();
-            $sUpdate = <<<QUERY
-                UPDATE T01_Usuario SET T01_NumConexiones=T01_NumConexiones+1,
-                T01_FechaHoraUltimaConexion = {$iFechaActual}
-                WHERE T01_CodUsuario='{$oUsuario->getCodUsuario()}';
-            QUERY;
-
+            
             $oUsuario->setFechaHoraUltimaConexionAnterior($oUsuario->getFechaHoraUltimaConexion());
             $oUsuario->setFechaHoraUltimaConexion($iFechaActual);
             $oUsuario->setNumAccesos($oUsuario->getNumAccesos()+1);
-
+            
+            $sUpdate = <<<QUERY
+                UPDATE T01_Usuario SET T01_NumConexiones = {$oUsuario->getNumAccesos()},
+                T01_FechaHoraUltimaConexion = {$oUsuario->getFechaHoraUltimaConexion()}
+                WHERE T01_CodUsuario='{$oUsuario->getCodUsuario()}';
+            QUERY;
+                
             return DBPDO::ejecutarConsulta($sUpdate);
         }
 
