@@ -28,11 +28,13 @@
     }
 
     $aErrores = [
-        'descripcion' => ''
+        'descripcion' => '',
+        'imagenUsuario' => ''
     ];
 
     $aRespuestas = [
-        'descripcion' => ''
+        'descripcion' => '',
+        'imagenUsuario' => ''
     ];
     
     $bEntradaOK = true;
@@ -45,17 +47,29 @@
         'fechaHoraUltimaConexion' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getFechaHoraUltimaConexion(),
         'numConexiones' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getNumAccesos(),
         'perfil' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getPerfil(),
-        'password' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getPassword()
+        'password' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getPassword(),
+        'imagenUsuario' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getImagenUsuario()
     ];
     
     if(isset($_REQUEST['aceptar'])){
         $aErrores['descripcion']= validacionFormularios::comprobarAlfaNumerico($_REQUEST['descripcion'], 255, 3, 1);
         
-        if($aErrores['descripcion']!=null){
-            $_REQUEST['descripcion']=$_SESSION['usuario214DWESAplicacionLoginLogout']->getDescUsuario();
-            $bEntradaOK=false;
-        }
+        $aErrores['imagenUsuario'] = validacionFormularios::comprobarAlfaNumerico($_FILES['imagenUsuario']['name'], 255, 3, 0);
         
+        if($aErrores['imagenUsuario']==null && !empty($_FILES['imagenUsuario']['name'])){
+           $aExtensiones = ['jpg', 'jpeg', 'png']; //Array de extensiones válidas
+           $extension = substr($_FILES['imagenUsuario']['name'], strpos($_FILES['imagenUsuario']['name'], '.') + 1); //Se extrae la extensión del nombre del archivo
+           //Si la extensión extraída no coincide con ninguna de las del array
+           if (!in_array($extension, $aExtensiones)) {
+                $aErrores['imagenUsuario'] = "El archivo no tiene una extensión válida. Sólo se admite ".implode(', ', $aExtensiones)."."; //Creación del mensaje de error 
+           }
+        }
+        foreach($aErrores as $error){
+            //condición de que hay un error
+            if(($error)!=null){
+                $bEntradaOK=false; //La entrada está mal
+            }
+        }
     }
     else{
         $bEntradaOK = false;
@@ -63,7 +77,15 @@
     if($bEntradaOK){
         $aRespuestas['descripcion'] = $_REQUEST['descripcion'];
         
-        $_SESSION['usuario214DWESAplicacionLoginLogout']= UsuarioPDO::modificarUsuario($_SESSION['usuario214DWESAplicacionLoginLogout'],$aRespuestas['descripcion']);
+        if($_FILES['imagenUsuario']['name'] != ''){
+                $aRespuestas['imagenUsuario'] = base64_encode(file_get_contents($_FILES['imagenUsuario']['tmp_name'])); //Almacenamiento del fichero enviado
+            }
+            //Si no se ha especificado imagen
+            else{
+                $aRespuestas['imagenUsuario'] = $_SESSION['usuario214DWESAplicacionLoginLogout']->getImagenUsuario();
+            }
+        
+        $_SESSION['usuario214DWESAplicacionLoginLogout']= UsuarioPDO::modificarUsuario($_SESSION['usuario214DWESAplicacionLoginLogout'],$aRespuestas['descripcion'], $aRespuestas['imagenUsuario']);
         
         $_SESSION['paginaEnCurso'] = 'inicioPrivado';
         

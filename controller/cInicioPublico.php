@@ -7,7 +7,12 @@
  */
 
     $_SESSION['paginaAnterior'] = 'inicioPublico';
-
+    
+    if(isset($_REQUEST['volver'])){
+        header('Location: ../ProyectoDWES/indexProyectoDWES.php');
+        exit;
+    }
+    
     if(isset($_REQUEST['registro'])){
         $_SESSION['paginaEnCurso'] = 'registro';
         header('Location: index.php');

@@ -12,6 +12,8 @@
             <form action="index.php" method="post">
                 <button type="submit" name="login" class="boton">Log in</button>
                 <button type="submit" name="registro" class="boton">Registrarse</button>
+                <hr>
+                <button type="submit" name="volver" class="boton">Volver a ProyectoDWES</button>
             </form>
         </main>
     </body>

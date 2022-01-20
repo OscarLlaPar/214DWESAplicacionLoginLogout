@@ -20,22 +20,30 @@ header{
     height: 10vh;
     border-bottom:solid #2F95FA 1px;
     display:flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-flow: column;
 }
 
 main{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 80vh;
     flex-flow: column;
     gap: 20px;
+    padding-top: 100px;
 }
 h2{
     font-size:18px;
     color:#2F95FA;
+}
+.fotoPerfil{
+    height: 150px;
+    width: 150px;
+    border: solid white 3px;
+    border-radius: 8px;
+    padding:5px;
 }
 form, form table{
     height:15vh;
@@ -53,6 +61,9 @@ input[readonly]{
 input[readonly]:hover{
     cursor:initial;
 }
+hr{
+    margin: 20px 0;
+}
 span{
     color: #A7083C;
 }
@@ -61,10 +72,16 @@ span{
     padding:5px;
     background-color: grey;
     color:white;
-    margin:5px;                                                                                                  
+    margin:5px;
+    transition: all 0.2s ease-in;
 }
 .boton:hover{
     cursor: pointer;
+    background-color:#2654EB;
+}
+.boton:active{
+    background-color:#3B0859;
+    border:solid #11319C 2px;
 }
 .wip{
     font-size:80px;

@@ -8,7 +8,7 @@
     <body>
         <main>
             <h2 class="titulo">Editar cuenta</h2>
-            <form action="index.php" method="post">
+            <form action="index.php" method="post" enctype="multipart/form-data">
                 <table>
                     <tr>
                         <td><label for="usuario">Nombre de usuario: </label></td>
@@ -34,6 +34,27 @@
                     <tr>
                         <td><label for="password">Contraseña: </label></td>
                         <td><input id="password" type="password" name="password" readonly value="<?php echo $aUsuario['password']?>"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="imagenUsuario">Imagen de usuario (.png, .jpg): </label></td>
+                        <td><input id="imagenUsuario" type="file" name="imagenUsuario"></td>
+                        <td>
+                            <?php
+                                if($aUsuario['imagenUsuario']){
+                            ?>
+                                <img class="fotoPerfil" src="data:image/gif;base64, <?php echo $aUsuario['imagenUsuario'] ?>" alt="Foto de perfil">
+                            <?php
+                                }
+                                else{
+                            ?>
+                                <img class="fotoPerfil" src="webroot/img/perfil.png" alt="Foto de perfil">
+                            <?php
+                                }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><?php echo (isset($aErrores['imagenUsuario']))?"<span>".$aErrores['imagenUsuario']."</span>":""; ?></td>
                     </tr>
                 </table>
                 <button type="submit" name="aceptar" class="boton">Aceptar</button>

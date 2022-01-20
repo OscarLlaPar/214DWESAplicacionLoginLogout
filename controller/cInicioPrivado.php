@@ -43,7 +43,8 @@
     $aVistaInicioPrivado = [
         'descUsuario' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getDescUsuario(),
         'numConexiones' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getNumAccesos(),
-        'fechaHoraUltimaConexion' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getFechaHoraUltimaConexionAnterior()
+        'fechaHoraUltimaConexion' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getFechaHoraUltimaConexionAnterior(),
+        'imagenUsuario' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getImagenUsuario()
     ];
     
     $vistaEnCurso = $aVistas['inicioPrivado'];
