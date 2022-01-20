@@ -9,13 +9,8 @@
     require_once "conf/confAplicacion.php";
     session_start();
     
-    if(isset($_REQUEST['registro'])){
-        $_SESSION['paginaAnterior'] = 'login';
-        $_SESSION['paginaEnCurso'] = 'WIP';
-    }
-    
     if(!isset($_SESSION['paginaEnCurso'])){
-        $_SESSION['paginaEnCurso'] = 'login';
+        $_SESSION['paginaEnCurso'] = 'inicioPublico';
     }
     // Cargado de la página indicada.
     require_once $aControladores[$_SESSION['paginaEnCurso']]; 

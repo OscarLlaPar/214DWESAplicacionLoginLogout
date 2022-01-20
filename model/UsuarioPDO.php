@@ -31,11 +31,8 @@
             $oResultado = DBPDO::ejecutarConsulta($sSelect);
             $oDatos = $oResultado->fetchObject();
             
-            $oUsuario = new Usuario($oDatos->T01_CodUsuario, $oDatos->T01_Password, $oDatos->T01_DescUsuario, $oDatos->T01_NumConexiones, time(), $oDatos->T01_FechaHoraUltimaConexion, $oDatos->T01_Perfil);
-            
-            if($oUsuario){
-                self::registrarUltimaConexion($codigoUsuario);
-                return $oUsuario;
+            if($oDatos){
+                return new Usuario($oDatos->T01_CodUsuario, $oDatos->T01_Password, $oDatos->T01_DescUsuario, $oDatos->T01_NumConexiones, $oDatos->T01_FechaHoraUltimaConexion, null, $oDatos->T01_Perfil, $oDatos->T01_ImagenUsuario);
             }
             /*
              * Si no existe, devuelve false.
@@ -44,7 +41,39 @@
                 return false;
             }
         }
+        
+        /**
+         * Búsqueda de un usuario que tenga el código pasado por parámetro
+         * 
+         * @param String $codigoUsuario Código del usuario que se quiere buscar.
+         * @return Object|boolean Devuelve un objeto Usuario si el usuario existe, 
+         * y false en caso contrario.
+         */
+        public static function buscarUsuarioPorCod($codigoUsuario) {
+            /*
+             * Query de selección del usuario según su código y contraseña, de modo
+             * que valida tanto la existencia del usuario como que la contraseña
+             * introducida sea correcta.
+             */
+            $sSelect = <<<QUERY
+                SELECT * FROM T01_Usuario
+                WHERE T01_CodUsuario='{$codigoUsuario}';
+            QUERY;
 
+            $oResultado = DBPDO::ejecutarConsulta($sSelect);
+            $oDatos = $oResultado->fetchObject();
+            
+            if($oDatos){
+                return new Usuario($oDatos->T01_CodUsuario, $oDatos->T01_Password, $oDatos->T01_DescUsuario, $oDatos->T01_NumConexiones, $oDatos->T01_FechaHoraUltimaConexion, null, $oDatos->T01_Perfil, $oDatos->T01_ImagenUsuario);
+            }
+            /*
+             * Si no existe, devuelve false.
+             */
+            else{
+                return false;
+            }
+        }
+        
         /**
          * Inserción, registro de un usuario en la base de datos.
          * 
@@ -67,18 +96,80 @@
         }
 
         /**
-         * 
+         * Modificación de usuario.
+        * 
+        * Modifica la descripción e imagen del usuario indicado en la base de datos
+        * y el propio objeto usuario.
+        * 
+        * @param Usuario $usuario Usuario a modificar.
+        * @param String $descUsuario Nueva descripción que dar al usuario.
+        * @param String $imagenUsuario Nueva imagen del usuario.
+        * @return Usuario|false Devuelve el objeto usuario modificado si todo es correcto,
+        * o false en caso contrario.
          */
-        public static function modificarUsuario(){
+        public static function modificarUsuario($usuario, $descUsuario, $imagenUsuario = ''){
+            $usuario->setDescUsuario($descUsuario);
+            $usuario->setImagenUsuario($imagenUsuario);
+            
+            $sUpdate = <<<QUERY
+                UPDATE T01_Usuario SET T01_DescUsuario = "{$usuario->getDescUsuario()}",
+                T01_ImagenUsuario = '{$usuario->getImagenUsuario()}'
+                WHERE T01_CodUsuario = "{$usuario->getCodUsuario()}";
+            QUERY;
 
+            
+
+            if(DBPDO::ejecutarConsulta($sUpdate)){
+                return $usuario;
+            }
+            else{
+                return false;
+            }
         }
-
+        
         /**
-         * 
-         */
-        public static function borrarUsuario(){
+        * Cambio de contraseña.
+        * 
+        * Modifica la contraseña del usuario indicado en la base de datos y en el
+        * objeto antes de devolverlo.
+        * 
+        * @param Usuario $usuario Usuario a modificar.
+        * @param String $password Nueva contraseña del usuario.
+        * @return Usuario|false Devuelve el objeto usuario modificado si todo es correcto,
+        * o false en caso contrario.
+        */
+       public static function cambiarPassword($usuario, $password){
+           $sUpdate = <<<QUERY
+               UPDATE T01_Usuario SET T01_Password = SHA2("{$usuario->getCodUsuario()}{$password}", 256)
+               WHERE T01_CodUsuario = "{$usuario->getCodUsuario()}";
+           QUERY;
 
-        }
+           $usuario->setPassword($descUsuario);
+
+           if(DBPDO::ejecutarConsulta($sUpdate)){
+               return $usuario;
+           }
+           else{
+               return false;
+           }
+       }
+        
+        /**
+        * Eliminación de usuario.
+        * 
+        * Elimina el usuario dado de la base de datos.
+        * 
+        * @param Usuario $usuario Usuario a ser eliminado.
+        * @return PDOStatement Resultado del delete.
+        */
+        public static function borrarUsuario($oUsuario){
+           $sDelete = <<<QUERY
+               DELETE FROM T01_Usuario
+               WHERE T01_CodUsuario='{$oUsuario->getCodUsuario()}';
+           QUERY;
+
+           return DBPDO::ejecutarConsulta($sDelete);
+       }
 
         /**
          * Dado un código de usuario, modifica la fecha-hora de última conexión, añade 
@@ -86,13 +177,19 @@
          * @param String $codigoUsuario Código del usuario al que registrar una nueva conexión.
          * @return PDOStatement Resultado del update.
          */
-        public static function registrarUltimaConexion($codigoUsuario){
+        public static function registrarUltimaConexion($oUsuario){
+            $iFechaActual = time();
+            
+            $oUsuario->setFechaHoraUltimaConexionAnterior($oUsuario->getFechaHoraUltimaConexion());
+            $oUsuario->setFechaHoraUltimaConexion($iFechaActual);
+            $oUsuario->setNumAccesos($oUsuario->getNumAccesos()+1);
+            
             $sUpdate = <<<QUERY
-                UPDATE T01_Usuario SET T01_NumConexiones=T01_NumConexiones+1,
-                T01_FechaHoraUltimaConexion = unix_timestamp()
-                WHERE T01_CodUsuario='{$codigoUsuario}';
+                UPDATE T01_Usuario SET T01_NumConexiones = {$oUsuario->getNumAccesos()},
+                T01_FechaHoraUltimaConexion = {$oUsuario->getFechaHoraUltimaConexion()}
+                WHERE T01_CodUsuario='{$oUsuario->getCodUsuario()}';
             QUERY;
-
+                
             return DBPDO::ejecutarConsulta($sUpdate);
         }
 

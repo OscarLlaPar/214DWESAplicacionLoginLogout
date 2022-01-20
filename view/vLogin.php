@@ -21,6 +21,7 @@
                 </table>
                 <button type="submit" name="login" class="boton">Iniciar sesion</button>
                 <button type="submit" name="registro" class="boton">Registrarse</button>
+                <button type="submit" name="volver" class="boton">Volver</button>
             </form>
         </main>
     </body>

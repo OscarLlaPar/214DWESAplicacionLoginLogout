@@ -6,11 +6,11 @@
         * @version 1.0 
         * Última modificación: 11/01/2022
     */
-    $vistaEnCurso = $aVistas['inicioPrivado'];
+    
     
     if(isset($_REQUEST['detalle'])){
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
-        $_SESSION['paginaEnCurso'] = 'WIP';
+        $_SESSION['paginaEnCurso'] = 'detalle';
         header('Location: index.php');
         exit;
     }
@@ -18,6 +18,13 @@
     if(isset($_REQUEST['mtoDepartamentos'])){
         $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         $_SESSION['paginaEnCurso'] = 'WIP';
+        header('Location: index.php');
+        exit;
+    }
+    
+    if(isset($_REQUEST['editarPerfil'])){
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+        $_SESSION['paginaEnCurso'] = 'miCuenta';
         header('Location: index.php');
         exit;
     }
@@ -36,9 +43,11 @@
     $aVistaInicioPrivado = [
         'descUsuario' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getDescUsuario(),
         'numConexiones' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getNumAccesos(),
-        'fechaHoraUltimaConexion' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getFechaHoraUltimaConexionAnterior()
+        'fechaHoraUltimaConexion' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getFechaHoraUltimaConexionAnterior(),
+        'imagenUsuario' => $_SESSION['usuario214DWESAplicacionLoginLogout']->getImagenUsuario()
     ];
     
+    $vistaEnCurso = $aVistas['inicioPrivado'];
     require_once "view/LayoutHeader.php";
     require_once $vistaEnCurso;
     require_once "view/LayoutFooter.php";
