@@ -6,6 +6,10 @@ Aplicación semejante al LoginLogout del Tema5, pero con orientación a objetos 
 - Logout
 - Página de WIP
 - Página de error
+- Ventana de detalle
+- Editar perfil (y editar imagen)
+- Borrar cuenta
+- Cambiar contraseña
 
 ### Software utilizado
 - Ubuntu Server 20.04.3
